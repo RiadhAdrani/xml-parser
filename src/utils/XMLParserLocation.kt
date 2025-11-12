@@ -21,6 +21,14 @@ class XMLParserLocation(var line: Int, var column: Int, var index: Int) {
         return xml[index]
     }
 
+    fun peek(xml: String): Char? {
+        if (isEndOfXml(xml)) {
+            return null
+        }
+
+        return xml[index + 1]
+    }
+
     fun next(xml: String): Char {
         if (isEndOfXml(xml)) {
             throw XMLParserError(this, "End of xml content reached")

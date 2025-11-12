@@ -3,7 +3,7 @@ import parser.parseTagName
 import utils.XMLParserLocation
 
 fun parseTagBlock(xml: String, parentLocation: XMLParserLocation) {
-    val location = parentLocation.clone()
+    var location = parentLocation.clone()
 
     location.skipSpacesAndNewLines(xml)
 
@@ -26,7 +26,11 @@ fun parseTagBlock(xml: String, parentLocation: XMLParserLocation) {
 
         if (tag == null) {
             // we need to parse the whole tag here
-            tag = parseTagName(xml, location)
+            val result = parseTagName(xml, location)
+
+            tag = result.value
+            location = result.location
+
             continue
         }
 
@@ -40,7 +44,7 @@ fun parseTagBlock(xml: String, parentLocation: XMLParserLocation) {
 
 
 fun main() {
-    val xml = "hello"
+    val xml = "hello world"
     val location = XMLParserLocation(0,0,0)
 
     val tag = parseTagName(xml, location)

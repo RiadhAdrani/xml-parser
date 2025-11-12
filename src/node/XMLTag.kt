@@ -1,4 +1,4 @@
 package node
 
-class XMLTag(value: String, type: XMLTagType) {
+class XMLTag(val value: String,val type: XMLTagType) {
 }
