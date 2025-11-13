@@ -1,10 +1,19 @@
 ### IntelliJ IDEA ###
+*.iml
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+
+### Gradle ###
+.gradle/
+build/
+
+# Gradle wrapper (keep these files!)
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradlew.bat
 
 ### Kotlin ###
-.kotlin
+.kotlin/
 
 ### Eclipse ###
 .apt_generated
@@ -15,8 +24,6 @@ out/
 .springBeans
 .sts4-cache
 bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
 
 ### NetBeans ###
 /nbproject/private/
