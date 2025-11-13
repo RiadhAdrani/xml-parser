@@ -84,10 +84,10 @@ class XMLParserLocation(var line: Int, var column: Int, var index: Int) {
             skipNewLines(xml)
 
             if (prevIndex == index) {
-                prevIndex = index
-
                 break
             }
+
+            prevIndex = index
         }
     }
 }

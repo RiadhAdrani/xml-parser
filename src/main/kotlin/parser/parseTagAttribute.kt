@@ -59,7 +59,7 @@ fun parseTagAttribute(xml: String, inputLocation: XMLParserLocation): ParseResul
             continue
         }
 
-        if (char != valueQuote || previousChar == '\\') {
+        if (char != valueQuote) {
             value += char
             continue
         }
@@ -68,5 +68,5 @@ fun parseTagAttribute(xml: String, inputLocation: XMLParserLocation): ParseResul
     }
 
     val attributes = XMLAttribute(name, value)
-    return ParseResult<XMLAttribute>(attributes, location)
+    return ParseResult(attributes, location)
 }

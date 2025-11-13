@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="parser.MainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-11-13T15:41:22.524Z" hostname="riadh-adrani-IdeaCentre-Gaming5-14IOB6" time="0.0">
+  <properties/>
+  <testcase name="testBasicAddition()" classname="parser.MainTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
