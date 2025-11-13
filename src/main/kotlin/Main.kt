@@ -1,7 +1,4 @@
-import node.XMLTagName
 import parser.parseTagAttribute
-import parser.parseTagBlock
-import parser.parseTagName
 import utils.XMLParserLocation
 
 fun main() {
