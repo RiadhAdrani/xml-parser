@@ -1,6 +1,6 @@
 package node
 
-enum class XMLNodeType {
+enum class XMLParsableType {
     Prolog,
     DocType,
     Root,

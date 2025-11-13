@@ -23,3 +23,11 @@ fun isValidTagChar(char: Char): Boolean {
 fun isValidTagStartChar(char: Char): Boolean {
     return isAlphaCharacter(char) || char == '_' || char == ':'
 }
+
+fun isValidAttributeNameStartChar(char: Char): Boolean {
+    return isAlphaCharacter(char) || char == '_' || char == ':'
+}
+
+fun isValidAttributeNameChar(char: Char): Boolean {
+    return isValidAttributeNameStartChar(char) || isNumericalCharacter(char) || char == '-' ||  char == '.'
+}

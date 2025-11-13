@@ -1,13 +1,13 @@
 package parser
 
-import node.XMLTag
+import node.XMLTagName
 import node.XMLTagType
 import utils.XMLParserError
 import utils.XMLParserLocation
 import utils.isValidTagChar
 import utils.isValidTagStartChar
 
-fun parseTagName(xml: String, inputLocation: XMLParserLocation): ParseResult<XMLTag> {
+fun parseTagName(xml: String, inputLocation: XMLParserLocation): ParseResult<XMLTagName> {
     val location = inputLocation.clone()
     var char: Char = location.getCurrentChar(xml)
 
@@ -23,7 +23,7 @@ fun parseTagName(xml: String, inputLocation: XMLParserLocation): ParseResult<XML
             }
         }
 
-        return ParseResult(XMLTag(tag, XMLTagType.ProcessingInstruction), location)
+        return ParseResult(XMLTagName(tag, XMLTagType.ProcessingInstruction), location)
     }
 
     if (char == '!') {
@@ -40,7 +40,7 @@ fun parseTagName(xml: String, inputLocation: XMLParserLocation): ParseResult<XML
                 char = location.next(xml)
             }
 
-            return ParseResult( XMLTag("DOCTYPE", XMLTagType.DocType), location)
+            return ParseResult( XMLTagName("DOCTYPE", XMLTagType.DocType), location)
         }
 
         if (char == '['){
@@ -52,7 +52,7 @@ fun parseTagName(xml: String, inputLocation: XMLParserLocation): ParseResult<XML
                 char = location.next(xml)
             }
 
-            return ParseResult( XMLTag("[CDATA[", XMLTagType.CDATA), location)
+            return ParseResult( XMLTagName("[CDATA[", XMLTagType.CDATA), location)
         }
 
 
@@ -66,7 +66,7 @@ fun parseTagName(xml: String, inputLocation: XMLParserLocation): ParseResult<XML
 
             val next = location.peek(xml)
             if (next == ' ' || next == '\t' || next == '\n') {
-                return ParseResult(XMLTag("!--", XMLTagType.Comment), location)
+                return ParseResult(XMLTagName("!--", XMLTagType.Comment), location)
             }
 
             throw XMLParserError(location, "Expected a space-like character after the comment tag but go ($char)")
@@ -89,8 +89,8 @@ fun parseTagName(xml: String, inputLocation: XMLParserLocation): ParseResult<XML
     }
 
     if (tag.contains(':')) {
-        return ParseResult(XMLTag(tag, XMLTagType.Namespace), location)
+        return ParseResult(XMLTagName(tag, XMLTagType.Namespace), location)
     }
 
-    return ParseResult(XMLTag(tag, XMLTagType.Standard), location)
+    return ParseResult(XMLTagName(tag, XMLTagType.Standard), location)
 }
