@@ -2,4 +2,4 @@ package parser
 
 import utils.XMLParserLocation
 
-class ParseResult<T>(val value: T, val location: XMLParserLocation) {}
+data class ParseResult<T>(val value: T, val location: XMLParserLocation) {}

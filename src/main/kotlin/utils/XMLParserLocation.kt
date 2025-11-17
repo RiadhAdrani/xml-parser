@@ -29,20 +29,22 @@ class XMLParserLocation(var line: Int, var column: Int, var index: Int) {
         return xml[index + 1]
     }
 
-    fun next(xml: String): Char {
+    fun next(xml: String, step: Int = 1): Char {
         if (isEndOfXml(xml)) {
             throw XMLParserError(this, "End of xml content reached")
         }
 
         val current = getCurrentChar(xml)
 
-        index++
+        for (i in 1..step) {
+            index++
 
-        if (current == '\n') {
-            column = 0
-            line++
-        } else {
-            column++
+            if (current == '\n') {
+                column = 0
+                line++
+            } else {
+                column++
+            }
         }
 
         return getCurrentChar(xml)
@@ -89,5 +91,11 @@ class XMLParserLocation(var line: Int, var column: Int, var index: Int) {
 
             prevIndex = index
         }
+    }
+
+    fun applyFrom(location: XMLParserLocation) {
+        index = location.index
+        column = location.column
+        line = location.line
     }
 }

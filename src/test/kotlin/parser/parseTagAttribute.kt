@@ -6,7 +6,7 @@ import utils.XMLParserLocation
 import kotlin.test.assertEquals
 
 
-class MainTest {
+class ParseTagAttributeTests {
     val location = XMLParserLocation(0,0,0)
 
     @Test
