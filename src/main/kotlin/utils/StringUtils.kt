@@ -31,7 +31,3 @@ fun isValidAttributeNameStartChar(char: Char): Boolean {
 fun isValidAttributeNameChar(char: Char): Boolean {
     return isValidAttributeNameStartChar(char) || isNumericalCharacter(char) || char == '-' ||  char == '.'
 }
-
-fun isValidTextNodeChar(char: Char): Boolean {
-    return char != '<' && char != '&'
-}

@@ -1,11 +1,12 @@
 import parser.parseTagAttribute
-import utils.XMLParserLocation
+import parser.parseTagBlock
+import classes.XMLParserLocation
 
 fun main() {
-    val xml = "hello='one'"
+    val xml = "<tag name='value'><text/> node  x<close/></tag>"
     val location = XMLParserLocation(0,0,0)
 
-    val tag = parseTagAttribute(xml, location)
+    val tag = parseTagBlock(xml, location)
 
     print(tag)
 }

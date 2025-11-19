@@ -1,4 +1,4 @@
-package node
+package classes
 
 abstract class XMLEntity(
     val type: XMLParsableType,

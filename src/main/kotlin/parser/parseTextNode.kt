@@ -1,16 +1,17 @@
 package parser
 
-import node.XMLTextNode
-import utils.XMLParserError
-import utils.XMLParserLocation
+import classes.XMLParseResult
+import classes.XMLTextNode
+import classes.XMLParserError
+import classes.XMLParserLocation
 
-fun parseTextNode(xml: String, inputLocation: XMLParserLocation): ParseResult<XMLTextNode> {
+fun parseTextNode(xml: String, inputLocation: XMLParserLocation): XMLParseResult<XMLTextNode> {
     val location = inputLocation.clone()
     var char = location.getCurrentChar(xml)
 
     val text: StringBuilder = StringBuilder("")
 
-    while (char != '<' || !location.isEndOfXml(xml)) {
+    while (char != '<' && !location.isEndOfXml(xml)) {
         text.append(char)
 
         if (!location.isEndOfXml(xml)) {
@@ -35,5 +36,5 @@ fun parseTextNode(xml: String, inputLocation: XMLParserLocation): ParseResult<XM
 
     val node = XMLTextNode(value)
 
-    return ParseResult(node, location)
+    return XMLParseResult(node, location)
 }

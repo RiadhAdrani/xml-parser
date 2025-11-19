@@ -1,4 +1,4 @@
-package utils
+package classes
 
 class XMLParserLocation(var line: Int, var column: Int, var index: Int) {
 

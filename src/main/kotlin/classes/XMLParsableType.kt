@@ -1,4 +1,4 @@
-package node
+package classes
 
 enum class XMLParsableType {
     Prolog,

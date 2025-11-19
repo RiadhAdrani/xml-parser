@@ -1,70 +1,52 @@
 package parser
 
-import node.XMLParsableType
-import node.XMLTag
-import node.XMLTagName
-import utils.XMLParserError
-import utils.XMLParserLocation
+import classes.XMLParseResult
+import classes.XMLTag
+import classes.XMLTagName
+import classes.XMLParserError
+import classes.XMLParserLocation
+import classes.XMLTagType
 
-fun parseTagBlock(xml: String, inputLocation: XMLParserLocation): ParseResult<XMLTag> {
-    var location = inputLocation.clone()
-
-    var char = location.getCurrentChar(xml)
+fun parseTagBlock(xml: String, inputLocation: XMLParserLocation): XMLParseResult<XMLTag> {
+    val location = inputLocation.clone()
+    val char = location.getCurrentChar(xml)
 
     // check for the opening
     if (char != '<') {
         throw XMLParserError(location,"Expected a tag block to start with (<) but got ($char)")
     }
 
-    var isSelfClosing = false
-    var didClose = false
     var tag : XMLTagName? = null
 
     location.next(xml)
 
-    while (!location.isEndOfXml(xml)) {
-        char = location.getCurrentChar(xml)
+    var result : XMLParseResult<XMLTag>? = null
 
+    while (!location.isEndOfXml(xml)) {
         if (tag == null) {
             // we need to parse the whole tag name here
             val result = parseTagName(xml, location)
 
             tag = result.value
-            location = result.location
+            location.applyFrom(result.location)
 
             continue
         }
 
-        location.skipSpacesAndNewLines(xml)
+        // according to the type of the tag we parse what's next
 
-        char = location.getCurrentChar(xml)
+        if (tag.type == XMLTagType.Standard || tag.type == XMLTagType.Namespace) {
+            result = parseStandardTagBlock(xml, location, tag)
 
-        // check if we reached the end of the tag
-        if (char == '/') {
-            // we expect the next character to self close the tag
-            char = location.next(xml)
-            if (char != '>') {
-                throw XMLParserError(location, "Expected a self closing tag, but got ($char)")
-            }
-
-            isSelfClosing = true
             break
         }
 
-        if (char == '>' && !didClose ) {
-            didClose = true
-            continue
-        }
-
-        // check for attributes
+        throw XMLParserError(location, "Parsing tag type (${tag.type}) is not implemented")
     }
 
-    if (tag == null)  {
-        throw XMLParserError(location, "Unexpected State: tag is null")
+    if (result == null) {
+        throw XMLParserError(location, "Unexpected state: tag block was not parsed")
     }
-
-    val block = XMLTag(XMLParsableType.Element, "", null, )
-    val result = ParseResult<XMLTag>(block, location)
 
     return result
 }

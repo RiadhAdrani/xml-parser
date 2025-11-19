@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import parser.parseTagAttribute
-import utils.XMLParserError
-import utils.XMLParserLocation
+import classes.XMLParserError
+import classes.XMLParserLocation
 import kotlin.test.assertEquals
 
 

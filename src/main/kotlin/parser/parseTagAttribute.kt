@@ -1,12 +1,13 @@
 package parser
 
-import node.XMLAttribute
-import utils.XMLParserError
-import utils.XMLParserLocation
+import classes.XMLAttribute
+import classes.XMLParseResult
+import classes.XMLParserError
+import classes.XMLParserLocation
 import utils.isValidAttributeNameChar
 import utils.isValidAttributeNameStartChar
 
-fun parseTagAttribute(xml: String, inputLocation: XMLParserLocation): ParseResult<XMLAttribute> {
+fun parseTagAttribute(xml: String, inputLocation: XMLParserLocation): XMLParseResult<XMLAttribute> {
     var location = inputLocation.clone()
     var char = location.getCurrentChar(xml)
     var previousChar = char
@@ -68,5 +69,5 @@ fun parseTagAttribute(xml: String, inputLocation: XMLParserLocation): ParseResul
     }
 
     val attributes = XMLAttribute(name, value)
-    return ParseResult(attributes, location)
+    return XMLParseResult(attributes, location)
 }
