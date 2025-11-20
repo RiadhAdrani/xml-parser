@@ -11,7 +11,7 @@ fun parseTextNode(xml: String, inputLocation: XMLParserLocation): XMLParseResult
 
     val text: StringBuilder = StringBuilder("")
 
-    while (char != '<' && !location.isEndOfXml(xml)) {
+    while (char != '<') {
         text.append(char)
 
         if (!location.isEndOfXml(xml)) {
