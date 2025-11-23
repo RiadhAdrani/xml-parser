@@ -107,7 +107,7 @@ fun parseStandardTagBlock(xml: String, inputLocation: XMLParserLocation, tagName
     }
 
     val type = if (tagName.type == XMLTagType.Namespace) XMLParsableType.Namespace else XMLParsableType.Element
-    val tag = XMLTag(type,"",null,tagName,children,attributes)
+    val tag = XMLTag(type,"",tagName,children,attributes)
 
 
     return XMLParseResult(tag, location)
