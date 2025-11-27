@@ -37,6 +37,8 @@ fun parseTagBlock(xml: String, inputLocation: XMLParserLocation): XMLParseResult
         result = when (tag.type) {
             XMLTagType.Standard, XMLTagType.Namespace -> parseStandardTagBlock(xml, location, tag)
             XMLTagType.CDATA -> parseCdataTagBlock(xml, location, tag)
+            XMLTagType.Comment -> parseCommentTagBlock(xml, location, tag)
+
             else -> throw XMLParserError(location, "Parsing tag type (${tag.type}) is not implemented")
         }
 
